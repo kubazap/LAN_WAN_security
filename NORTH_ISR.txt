@@ -1,0 +1,116 @@
+NORTH_ISR#show run
+Building configuration...
+
+
+Current configuration : 1569 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+security passwords min-length 10
+!
+hostname NORTH_ISR
+!
+!
+!
+enable secret 5 $1$mERr$WvpW0n5HghRrqnrwXCUUl.
+!
+!
+!
+!
+!
+aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+class-map type inspect match-any ZONE_PROTOCOLS
+ match protocol tcp
+ match protocol udp
+ match protocol icmp
+!
+policy-map type inspect ZONE_POLICY
+ class type inspect ZONE_PROTOCOLS
+  inspect
+!
+!
+!
+zone security INSIDE
+zone security OUTSIDE
+zone security DMZ
+zone-pair security INSIDE_TO_OUTSIDE source INSIDE destination OUTSIDE
+ service-policy type inspect ZONE_POLICY
+zone-pair security OUTSIDE_TO_DMZ source OUTSIDE destination DMZ
+ service-policy type inspect ZONE_POLICY
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 195.29.151.1 255.255.255.224
+ zone-member security DMZ
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1
+ ip address 195.29.151.33 255.255.255.224
+ zone-member security INSIDE
+ duplex auto
+ speed auto
+!
+interface Serial0/1/0
+ ip address 195.29.151.65 255.255.255.224
+ zone-member security OUTSIDE
+ clock rate 2000000
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 Serial0/1/0 
+!
+ip flow-export version 9
+!
+!
+!
+banner motd ^CUnauthorized access strictly prohibited!^C
+!
+!
+!
+!
+line con 0
+ exec-timeout 5 0
+ password ciscoconpass
+ logging synchronous
+!
+line aux 0
+!
+line vty 0 4
+!
+!
+!
+end

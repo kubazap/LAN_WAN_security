@@ -1,0 +1,186 @@
+SOUTH_GATE#show run
+Building configuration...
+
+
+Current configuration : 3295 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+security passwords min-length 10
+!
+hostname SOUTH_GATE
+!
+!
+!
+enable secret 5 $1$mERr$WvpW0n5HghRrqnrwXCUUl.
+!
+!
+ip dhcp excluded-address 192.168.1.1 192.168.1.3
+!
+ip dhcp pool VLAN10
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+!
+!
+aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username admin privilege 15 secret 5 $1$mERr$WvpW0n5HghRrqnrwXCUUl.
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524PJ6R-
+license boot module c2900 technology-package securityk9
+!
+!
+!
+crypto isakmp policy 1
+ encr aes 256
+ authentication pre-share
+ group 5
+!
+crypto isakmp key Passwd1 address 192.1.16.2
+crypto isakmp key Passwd2 address 192.1.16.6
+!
+!
+!
+crypto ipsec transform-set VPN-1 esp-aes 256 esp-sha-hmac
+crypto ipsec transform-set VPN-2 esp-aes 256 esp-sha-hmac
+!
+crypto map VPN-MAP 10 ipsec-isakmp 
+ set peer 192.1.16.6
+ set transform-set VPN-2 
+ match address 100
+!
+crypto map VPN-MAP 20 ipsec-isakmp 
+ set peer 192.1.16.2
+ set transform-set VPN-1 
+ match address 100
+!
+!
+!
+!
+ip ssh version 2
+ip ssh authentication-retries 2
+ip domain-name tu.kielce.pl
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/0/0
+ ip address 188.146.21.10 255.255.255.252
+ ip nat outside
+ crypto map VPN-MAP
+!
+interface Serial0/0/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial0/3/0
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial0/3/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip nat inside source list 110 interface Serial0/0/0 overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 Serial0/0/0 
+!
+ip flow-export version 9
+!
+!
+access-list 100 permit ip 192.168.1.0 0.0.0.255 81.31.0.96 0.0.0.31
+access-list 1 remark Dostep do SSH tylko dla Administratorow
+access-list 1 permit 81.31.0.96 0.0.0.31
+access-list 110 permit ip 192.168.1.0 0.0.0.255 any
+!
+banner motd ^CUnauthorized access strictly prohibited!^C
+!
+!
+!
+!
+line con 0
+ exec-timeout 5 0
+ password ciscoconpass
+ logging synchronous
+!
+line aux 0
+!
+line vty 0 4
+ access-class 1 in
+ transport input ssh
+ privilege level 15
+!
+!
+parser view SupportAdmin
+ secret 5 $1$mERr$vciKX9Gj9.5APtXsSacXg.
+ commands configure include ip
+ commands configure include all ip route
+ commands configure include no
+ commands configure include no ip
+ commands configure include all no ip route
+ commands configure include all no router
+ commands configure include all router
+ commands exec include configure
+ commands exec include configure terminal
+ commands exec include all show
+!
+parser view Trainee
+ secret 5 $1$mERr$/4Ql6V0QUKveA0wBiY1yx.
+ commands configure include all access-list
+ commands configure include ip
+ commands configure include all ip access-list
+ commands configure include no
+ commands configure include all no access-list
+ commands configure include no ip
+ commands configure include all no ip access-list
+ commands exec include configure
+ commands exec include configure terminal
+ commands exec include all show
+!
+!
+end

@@ -1,0 +1,305 @@
+AS2#show run
+Building configuration...
+
+
+Current configuration : 6962 bytes
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname AS2
+!
+enable secret 5 $1$mERr$WvpW0n5HghRrqnrwXCUUl.
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/2
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/3
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/4
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/5
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/6
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/7
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/8
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/9
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/10
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/11
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/12
+ switchport access vlan 17
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/13
+ switchport access vlan 23
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/14
+ switchport access vlan 23
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/15
+ switchport access vlan 23
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/16
+ switchport access vlan 23
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/17
+ switchport access vlan 23
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/18
+ switchport access vlan 23
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/19
+ switchport access vlan 23
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/20
+ switchport access vlan 23
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security mac-address sticky 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/21
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/22
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 0060.3E7B.AE54
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/23
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/24
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 0060.3E29.E0EB
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet0/2
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan99
+ ip address 81.31.0.123 255.255.255.224
+!
+banner motd ^CUnauthorized access strictly prohibited!^C
+!
+!
+!
+line con 0
+ password 7 0822455D0A1606181C1B0D1739
+ logging synchronous
+ login
+ exec-timeout 5 0
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+!
+!
+end
